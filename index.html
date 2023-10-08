@@ -1,67 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <!-- ==== Css ==== -->
-        <link rel="stylesheet" href="css/style.css" />
-
-        <!-- ==== Title ==== -->
-        <title>Calculadora Responsiva</title>
-    </head>
-    
-    <body>
-        <div class="calculator-container">
-            <div class="calculator">
-                <input type="text" id="display" readonly />
-                <div class="button-container">
-                    <!-- ==== Botões da calculadora ==== -->
-                    <button class="button" onclick="appendToDisplay('7')">7</button>
-                    <button class="button" onclick="appendToDisplay('8')">8</button>
-                    <button class="button" onclick="appendToDisplay('9')">9</button>
-                    <button class="button" onclick="appendToDisplay('+')">+</button>
-                    <button class="button" onclick="appendToDisplay('4')">4</button>
-                    <button class="button" onclick="appendToDisplay('5')">5</button>
-                    <button class="button" onclick="appendToDisplay('6')">6</button>
-                    <button class="button" onclick="appendToDisplay('-')">-</button>
-                    <button class="button" onclick="appendToDisplay('1')">1</button>
-                    <button class="button" onclick="appendToDisplay('2')">2</button>
-                    <button class="button" onclick="appendToDisplay('3')">3</button>
-                    <button class="button" onclick="appendToDisplay('*')">*</button>
-                    <button class="button" onclick="appendToDisplay('0')">0</button>
-                    <button class="button" onclick="appendToDisplay('.')">.</button>
-                    <button class="button" onclick="clearDisplay()">C</button>
-                    <button class="button" onclick="appendToDisplay('/')">/</button>
-                    <button class="button" onclick="calculate()">=</button>
-                </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Responsiva</title>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <input type="text" id="display" readonly>
+            <div class="button-container">
+                <!-- Botões da calculadora -->
+                <button class="button" onclick="appendToDisplay('7')">7</button>
+                <button class="button" onclick="appendToDisplay('8')">8</button>
+                <button class="button" onclick="appendToDisplay('9')">9</button>
+                <button class="button operator" onclick="appendToDisplay('+')">+</button>
+                <button class="button" onclick="appendToDisplay('4')">4</button>
+                <button class="button" onclick="appendToDisplay('5')">5</button>
+                <button class="button" onclick="appendToDisplay('6')">6</button>
+                <button class="button operator" onclick="appendToDisplay('-')">-</button>
+                <button class="button" onclick="appendToDisplay('1')">1</button>
+                <button class="button" onclick="appendToDisplay('2')">2</button>
+                <button class="button" onclick="appendToDisplay('3')">3</button>
+                <button class="button operator" onclick="appendToDisplay('*')">*</button>
+                <button class="button" onclick="appendToDisplay('0')">0</button>
+                <button class="button" onclick="appendToDisplay('.')">.</button>
+                <button class="button" onclick="clearDisplay()">C</button>
+                <button class="button operator" onclick="appendToDisplay('/')">/</button>
+                <button class="button operator" onclick="calculate()">=</button>
             </div>
         </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
 
-        <!-- ==== Script ==== -->
-        <script>
-            const display = document.getElementById('display');
+        function appendToDisplay(value) {
+            display.value += value;
+        }
 
-            function appendToDisplay(value) {
-                display.value += value;
-            }
+        function clearDisplay() {
+            display.value = '';
+        }
 
-            function clearDisplay() {
-                display.value = '';
-            }
+        function calculate() {
+            const expression = display.value;
+            try {
+                const result = eval(expression);
 
-            function calculate() {
-                const expression = display.value;
-                try {
-                    const result = eval(expression);
-                    if (isNan(result) || !isFinite(result)) {
-                        throw new Error('Erro');
-                    }
-                    display.value = result;
-                } catch (error) {
-                    display.value = 'Erro';
+                if (isNaN(result) || !isFinite(result)) {
+                    throw new Error('Erro');
                 }
+
+                display.value = result;
+            } catch (error) {
+                display.value = 'Erro';
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>
+
+<!-- ==== Copyright (c) 2023 by Luiz Albuquerque (https://codepen.io/luiz-337/pen/LYMMdBM)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ ==== -->
